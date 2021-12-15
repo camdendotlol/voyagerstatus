@@ -42,11 +42,6 @@ show_v1=1
 show_v2=0
 use_miles=0
 
-convert_to_miles () {
-  km=$1
-  miles_distance=$(echo "${km} * 0.6213712" | bc)
-}
-
 format_distance () {
   distance=$1
 
