@@ -89,9 +89,9 @@ handle_launch_arg () {
   elif [ $arg == "-k" ]
   then
     use_miles=0
-  elif [[ $arg == color=* ]]
+  elif [[ $arg == -color=* ]]
   then
-    handle_color ${arg: 6}
+    handle_color ${arg: 7}
   else
     echo "Unknown launch argument: $arg"
   fi

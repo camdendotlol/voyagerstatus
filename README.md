@@ -30,7 +30,7 @@ I want to add support for Astronomical Units in the future.
 
 You can optionally choose a color to print the text in.
 
-The argument to set the color is `color=name` where `name` is:
+The argument to set the color is `-color=name` where `name` is:
 
 * red
 * blue
@@ -49,7 +49,7 @@ Voyager 2 is 12,045,896,105 miles away.
 ```
 
 ```bash
-$ ./voyagerstatus.sh -v1 color=red
+$ ./voyagerstatus.sh -v1 -color=red
 Voyager 1 is 23,294,958,078 kilometers away.
 # You can't see the color here on GitHub.
 ```
