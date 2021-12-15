@@ -8,6 +8,18 @@ To use it, you can just download it and run `./voyagerstatus.sh`. This will run 
 
 I made this to put in my `.bashrc` so I get a little reminder every time I open my terminal.
 
+## Installing
+
+You can run the .sh file directly after downloading, but you can also add it to your PATH for easier access.
+
+These instructions assume zero knowledge of setting up a command and provide reasonable defaults for new users.
+
+1. Create `~/.local/bin` if it doesn't already exist.
+2. Move `voyagerstatus.sh` to `~/.local/bin`.
+3. Rename `voyagerstatus.sh` to just `voyagerstatus`.
+4. Make sure `~/.local/bin` is in your PATH ([see here for a how-to](https://www.howtogeek.com/658904/how-to-add-a-directory-to-your-path-in-linux/)).
+5. Now you can run `voyagerstatus` from your terminal.
+
 ## Options
 
 There are a handful of launch options available.
