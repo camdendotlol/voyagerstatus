@@ -13,7 +13,7 @@
 # Unix epoch time from the moment I got the starting values.
 CALIBRATION_TIME=1639617646
 
-# Astronomical units
+# Kilometers
 V1_CALIBRATION_DISTANCE=23175321333
 V2_CALIBRATION_DISTANCE=19281870994
 
