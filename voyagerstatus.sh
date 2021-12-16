@@ -38,8 +38,8 @@ set_up_colors () {
 }
 
 # Set up default options (show Voyager 1 distance in kilometers)
-show_v1=1
-show_v2=0
+only_show_v1=0
+only_show_v2=0
 use_miles=0
 
 display_distance () {
@@ -72,12 +72,10 @@ handle_launch_arg () {
 
   if [ $arg == "-v1" ]
   then
-    show_v1=1
-    show_v2=0
+    only_show_v1=1
   elif [ $arg == "-v2" ]
   then
-    show_v1=0
-    show_v2=1
+    only_show_v2=1
   elif [ $arg == "-m" ]
   then
     use_miles=1
@@ -92,13 +90,13 @@ handle_launch_arg () {
   fi
 }
 
-get_v1 () {
+display_v1 () {
   V1_DISTANCE_SINCE_CALIBRATION=$(echo "${SECONDS_SINCE_CALIBRATION} * ${V1_VELOCITY}" | bc)
   V1_FINAL_DISTANCE=$(echo "${V1_DISTANCE_SINCE_CALIBRATION} + ${V1_CALIBRATION_DISTANCE}" | bc)
   echo "Voyager 1 is $(display_distance $V1_FINAL_DISTANCE) from the Sun."
 }
 
-get_v2 () {
+display_v2 () {
   V2_DISTANCE_SINCE_CALIBRATION=$(echo "${SECONDS_SINCE_CALIBRATION} * ${V2_VELOCITY}" | bc)
   V2_FINAL_DISTANCE=$(echo "${V2_DISTANCE_SINCE_CALIBRATION} + ${V2_CALIBRATION_DISTANCE}" | bc)
   echo "Voyager 2 is $(display_distance $V2_FINAL_DISTANCE) from the Sun."
@@ -110,12 +108,15 @@ main () {
     handle_launch_arg $i
   done
 
-  if [ $show_v1 == 1 ]
+  if [ $only_show_v1 == 1 ]
   then
-    get_v1
-  elif [ $show_v2 == 1 ]
+    display_v1
+  elif [ $only_show_v2 == 1 ]
   then
-    get_v2
+    display_v2
+  else
+    display_v1
+    display_v2
   fi
 }
 

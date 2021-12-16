@@ -24,18 +24,20 @@ These instructions assume zero knowledge of setting up a command and provide rea
 
 There are a handful of launch options available.
 
-You can add as many launch arguments as you want, but only the final argument in each category will take effect.
-
 ### Distance units
+
+If you enter more than one distance argument, only the final one will take effect.
 
 `-k`: Show the distance in kilometers (default)   
 `-m`: Show the distance in miles   
 
-I want to add support for Astronomical Units in the future.
+I want to add support for astronomical units in the future.
 
 ### Pick a probe
 
-`-v1`: Display the distance of Voyager 1 (default)   
+If neither is specificed, both will be shown. To only display one, use its corresponding launch argument.
+
+`-v1`: Display the distance of Voyager 1   
 `-v2`: Display the distance of Voyager 2   
 
 ### Color
@@ -56,23 +58,27 @@ The argument to set the color is `-color=name` where `name` is:
 ## Examples:
 
 ```bash
+$ ./voyagerstatus.sh 
+Voyager 1 is 23,175,356,063 kilometers from the Sun.
+Voyager 2 is 19,281,902,403 kilometers from the Sun.
+```
+
+```bash
 $ ./voyagerstatus.sh -v2 -m
 Voyager 2 is 12,045,896,105 miles from the Sun.
 ```
 
 ```bash
 $ ./voyagerstatus.sh -v1 -color=red
-Voyager 1 is 23,294,958,078 kilometers from the Sun.
-# You can't see the color here on GitHub.
+Voyager 1 is 23,294,958,078 kilometers from the Sun. # You can't see the color here on GitHub.
 ```
 
 ```bash
-$ ./voyagerstatus.sh
-Voyager 1 is 23,294,959,098 kilometers from the Sun.
+$ ./voyagerstatus.sh -v2 -v1
+Voyager 1 is 23,175,348,345 kilometers from the Sun.
+Voyager 2 is 19,281,895,423 kilometers from the Sun.
 ```
 
 ## Other info
-
-Voyager Status only shows one Voyager at a time. If you want to show both Voyager 1 and 2, you should run the command twice with the relevant launch options.
 
 I want to add an option for distance from the Earth, because that sounds a lot more interesting. But it requires some extra math due to the Earth's orbit. In fact, for part of the year the Voyager probes get *closer* to Earth, because the Earth's orbit moves us toward the Voyagers at a faster velocity than the Voyagers are moving away. So it'll be a bit of a challenge to pin down the math for that. But I plan to do it.
