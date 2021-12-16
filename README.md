@@ -1,6 +1,6 @@
 # Voyager Status
 
-This is a Bash script to calculate how far away Voyager 1 and 2 are from Earth.
+This is a Bash script to calculate how far away Voyager 1 and 2 are from the Sun.
 
 ![Example image showing the script in use with Voyager 1 and 2](/example.png)
 
@@ -57,20 +57,22 @@ The argument to set the color is `-color=name` where `name` is:
 
 ```bash
 $ ./voyagerstatus.sh -v2 -m
-Voyager 2 is 12,045,896,105 miles away.
+Voyager 2 is 12,045,896,105 miles from the Sun.
 ```
 
 ```bash
 $ ./voyagerstatus.sh -v1 -color=red
-Voyager 1 is 23,294,958,078 kilometers away.
+Voyager 1 is 23,294,958,078 kilometers from the Sun.
 # You can't see the color here on GitHub.
 ```
 
 ```bash
 $ ./voyagerstatus.sh
-Voyager 1 is 23,294,959,098 kilometers away.
+Voyager 1 is 23,294,959,098 kilometers from the Sun.
 ```
 
 ## Other info
 
 Voyager Status only shows one Voyager at a time. If you want to show both Voyager 1 and 2, you should run the command twice with the relevant launch options.
+
+I want to add an option for distance from the Earth, because that sounds a lot more interesting. But it requires some extra math due to the Earth's orbit. In fact, for part of the year the Voyager probes get *closer* to Earth, because the Earth's orbit moves us toward the Voyagers at a faster velocity than the Voyagers are moving away. So it'll be a bit of a challenge to pin down the math for that. But I plan to do it.

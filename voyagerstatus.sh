@@ -11,11 +11,11 @@
 # of each probe. This results in a value similar to the ones shown on the NASA JPL website.
 
 # Unix epoch time from the moment I got the starting values.
-CALIBRATION_TIME=1639601110
+CALIBRATION_TIME=1639617646
 
 # Astronomical units
-V1_CALIBRATION_DISTANCE=23294850298
-V2_CALIBRATION_DISTANCE=19385894076
+V1_CALIBRATION_DISTANCE=23175321333
+V2_CALIBRATION_DISTANCE=19281870994
 
 # Kilometers per second
 V1_VELOCITY=16.9995
@@ -42,7 +42,7 @@ show_v1=1
 show_v2=0
 use_miles=0
 
-format_distance () {
+display_distance () {
   distance=$1
 
   if [ $use_miles == 1 ]
@@ -95,13 +95,13 @@ handle_launch_arg () {
 get_v1 () {
   V1_DISTANCE_SINCE_CALIBRATION=$(echo "${SECONDS_SINCE_CALIBRATION} * ${V1_VELOCITY}" | bc)
   V1_FINAL_DISTANCE=$(echo "${V1_DISTANCE_SINCE_CALIBRATION} + ${V1_CALIBRATION_DISTANCE}" | bc)
-  echo "Voyager 1 is $(format_distance $V1_FINAL_DISTANCE) away."
+  echo "Voyager 1 is $(display_distance $V1_FINAL_DISTANCE) from the Sun."
 }
 
 get_v2 () {
   V2_DISTANCE_SINCE_CALIBRATION=$(echo "${SECONDS_SINCE_CALIBRATION} * ${V2_VELOCITY}" | bc)
   V2_FINAL_DISTANCE=$(echo "${V2_DISTANCE_SINCE_CALIBRATION} + ${V2_CALIBRATION_DISTANCE}" | bc)
-  echo "Voyager 2 is $(format_distance $V2_FINAL_DISTANCE) away."
+  echo "Voyager 2 is $(display_distance $V2_FINAL_DISTANCE) from the Sun."
 }
 
 main () {
