@@ -23,8 +23,9 @@ These instructions assume zero knowledge of setting up a command and provide rea
 
 1. Create `~/.local/bin` if it doesn't already exist.
 2. Move the `voyagerstatus` binary to `~/.local/bin`.
-3. Make sure `~/.local/bin` is in your PATH ([see here for a how-to](https://www.howtogeek.com/658904/how-to-add-a-directory-to-your-path-in-linux/)).
-4. Now you can run `voyagerstatus` from your terminal.
+3. You might have to run `chmod +x` on the binary to give it execution permissions. If you're on a Mac, you might also need to follow [these steps](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac) before your computer allows you to run it.
+4. Make sure `~/.local/bin` is in your PATH ([see here for a how-to](https://www.howtogeek.com/658904/how-to-add-a-directory-to-your-path-in-linux/)).
+5. Now you can run `voyagerstatus` from your terminal.
 
 ## Options
 
