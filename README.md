@@ -76,14 +76,8 @@ Voyager 2 is 12,045,896,105 miles from the Sun.
 ```
 
 ```bash
-$ ./voyagerstatus -v1 -color=red
+$ ./voyagerstatus -v1 --color=red
 Voyager 1 is 23,294,958,078 kilometers from the Sun. # You can't see the color here on GitHub.
-```
-
-```bash
-$ ./voyagerstatus -v2 -v1
-Voyager 1 is 23,175,348,345 kilometers from the Sun.
-Voyager 2 is 19,281,895,423 kilometers from the Sun.
 ```
 
 ## Other info
