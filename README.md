@@ -51,7 +51,7 @@ If neither is specificed, both will be shown. To only display one, use its corre
 
 You can optionally choose a color to print the text in.
 
-The argument to set the color is `-color=name` where `name` is:
+The argument to set the color is `--color=name` where `name` is:
 
 * red
 * blue
