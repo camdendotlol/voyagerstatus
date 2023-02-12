@@ -9,9 +9,10 @@
 // This script calculates the seconds elapsed since then, and multiplies them by the velocity
 // of each probe. This results in a value similar to the ones shown on the NASA JPL website.
 
-#include <stdio.h>
-#include <time.h>
 #include <locale.h>
+#include <time.h>
+#include <stdio.h>
+#include <string.h>
 
 // Unix epoch time from the moment I got the starting values.
 const unsigned long long CALIBRATION_TIME = 1639617646;
@@ -27,27 +28,45 @@ const float V2_VELOCITY = 15.3741;
 // Amount to multiply by for converting kilometers to miles
 const float KM_TO_MILES_OPERAND = 0.6213712;
 
-struct Colors {
-  char *red;
-  char *blue;
-  char *green;
-  char *cyan;
-  char *black;
-  char *yellow;
-  char *purple;
-  char *white;
-};
-
-const struct Colors COLOR_STRINGS = {
-  .red = "\e[0;31m",
-  .blue = "\e[0;34m",
-  .green = "\e[0;32m",
-  .cyan = "\e[0;36m",
-  .black = "\e[0;30m",
-  .yellow = "\e[0;33m",
-  .purple = "\e[0;35m",
-  .white = "\e[0;37m"
-};
+void print_color_str(char* color_str)
+{
+  if (strcmp(color_str, "--color=red") == 0)
+  {
+    printf("\e[0;31m");
+  }
+  else if (strcmp(color_str, "--color=blue") == 0)
+  {
+    printf("\e[0;34m");
+  }
+  else if (strcmp(color_str, "--color=green") == 0)
+  {
+    printf("\e[0;32m");
+  }
+  else if (strcmp(color_str, "--color=cyan") == 0)
+  {
+    printf("\e[0;36m");
+  }
+  else if (strcmp(color_str, "--color=black") == 0)
+  {
+    printf("\e[0;30m");
+  }
+  else if (strcmp(color_str, "--color=yellow") == 0)
+  {
+    printf("\e[0;33m");
+  }
+  else if (strcmp(color_str, "--color=purple") == 0)
+  {
+    printf("\e[0;35m");
+  }
+  else if (strcmp(color_str, "--color=white") == 0)
+  {
+    printf("\e[0;37m");
+  }
+  else
+  {
+    printf("Unrecognized color in argument %s\n", color_str);
+  }
+}
 
 struct Config {
   int only_show_v1;
@@ -101,7 +120,33 @@ void display_v2(struct Config config, unsigned long long seconds_since_calibrati
   printf(" from the Sun.\n");
 };
 
-int main(void)
+struct Config parse_arg(char* arg, struct Config config)
+{
+  if (strcmp(arg, "-v1") == 0)
+  {
+    config.only_show_v1 = 1;
+  }
+  else if (strcmp(arg, "-v2") == 0)
+  {
+    config.only_show_v2 = 1;
+  }
+  else if (strcmp(arg, "-m") == 0)
+  {
+    config.use_miles = 1;
+  }
+  else if (strncmp(arg, "--color=", 8) == 0)
+  {
+    print_color_str(arg);
+  }
+  else
+  {
+    printf("Unrecognized argument: %s\n", arg);
+  }
+
+  return config;
+}
+
+int main(int argc, char** argv)
 {
   // Enable formatting such as commas for number display
   setlocale(LC_NUMERIC, "");
@@ -110,6 +155,11 @@ int main(void)
     .only_show_v1 = 0,
     .only_show_v2 = 0,
     .use_miles = 0
+  };
+
+  int i;
+  for (i = 1; i < argc; i++) {
+    config = parse_arg(argv[i], config);
   };
 
   unsigned long long seconds_since_calibration;
@@ -127,5 +177,5 @@ int main(void)
   {
     display_v1(config, seconds_since_calibration);
     display_v2(config, seconds_since_calibration);
-  } 
+  }
 };
