@@ -4,11 +4,6 @@
 
 // This is a C rewrite of my Voyager Status bash script from 2021.
 
-// The calculation is pretty simple. I went to https://voyager.jpl.nasa.gov/mission/status/
-// and got the distances at that moment, and set CALIBRATION_TIME to the time of my visit.
-// This script calculates the seconds elapsed since then, and multiplies them by the velocity
-// of each probe. This results in a value similar to the ones shown on the NASA JPL website.
-
 #include <locale.h>
 #include <time.h>
 #include <stdio.h>
@@ -21,12 +16,21 @@ const unsigned long long CALIBRATION_TIME = 1639617646;
 const unsigned long long V1_CALIBRATION_DISTANCE = 23175321333;
 const unsigned long long V2_CALIBRATION_DISTANCE = 19281870994;
 
-// Kilometers per second
-const float V1_VELOCITY = 16.9995;
-const float V2_VELOCITY = 15.3741;
+// These velocities (in km/sec) are the product of some
+// experimentation at https://voyager.jpl.nasa.gov/mission/status/
+// instead of from any official source. We can estimate the distance
+// by taking the difference between the calibration time
+// (i.e. the time I got the original values in 2021) and the
+// current time, and multipling that by these velocity values.
+// With this technique, we can estimate the distance without
+// having to make any network requests. The downside is that
+// it will become slightly less accurate over time, but I doubt
+// NASA's is perfect either!
+const double V1_VELOCITY = 16.893258;
+const double V2_VELOCITY = 15.029668;
 
 // Amount to multiply by for converting kilometers to miles
-const float KM_TO_MILES_OPERAND = 0.6213712;
+const double KM_TO_MILES_OPERAND = 0.6213712;
 
 void print_color_str(char* color_str)
 {
@@ -88,7 +92,7 @@ void display_distance(unsigned long long distance, struct Config config)
   }
 };
 
-float get_distance(enum Voyager voyager, unsigned long long seconds_since_calibration)
+double get_distance(enum Voyager voyager, unsigned long long seconds_since_calibration)
 {
   switch(voyager){
     case 0:
@@ -102,7 +106,7 @@ float get_distance(enum Voyager voyager, unsigned long long seconds_since_calibr
 
 void display_v1(struct Config config, unsigned long long seconds_since_calibration)
 {
-  float distance;
+  double distance;
   distance = get_distance(0, seconds_since_calibration);
 
   printf("Voyager 1 is ");
@@ -112,7 +116,7 @@ void display_v1(struct Config config, unsigned long long seconds_since_calibrati
 
 void display_v2(struct Config config, unsigned long long seconds_since_calibration)
 {
-  float distance;
+  double distance;
   distance = get_distance(1, seconds_since_calibration);
 
   printf("Voyager 2 is ");
