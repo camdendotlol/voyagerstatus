@@ -11,13 +11,9 @@ This program calculates how far away Voyager 1 and 2 are from the Sun.
 
 I made this to put in my `.zshrc` so I get a little reminder every time I open my terminal.
 
-## Bash version
-
-I originally wrote this program as a Bash script in 2021, and in 2023 I ported it to C. The C port is the currently-supported version, but I left `voyagerstatus.sh` in the repo for posterity.
-
 ## Installing
 
-You can run program directly after downloading and compiling, but you can also add it to your PATH for easier access.
+You can run the program directly after downloading and compiling, but you can also add it to your PATH for easier access.
 
 These instructions assume zero knowledge of setting up a command and provide reasonable defaults for new users.
 
@@ -33,10 +29,9 @@ There are a handful of launch options available.
 
 ### Distance units
 
-If you enter more than one distance argument, only the final one will take effect.
+By default, `voyagerstatus` give the distance in kilometers.
 
-`-k`: Show the distance in kilometers (default)   
-`-m`: Show the distance in miles   
+`-m`: Show the distance in miles
 
 I want to add support for astronomical units in the future.
 
@@ -62,23 +57,29 @@ The argument to set the color is `--color=name` where `name` is:
 * purple
 * white
 
+Your terminal environment might display colors differently depending on theme, etc.
+
 ## Examples:
 
 ```bash
-$ ./voyagerstatus 
+$ voyagerstatus 
 Voyager 1 is 23,175,356,063 kilometers from the Sun.
 Voyager 2 is 19,281,902,403 kilometers from the Sun.
 ```
 
 ```bash
-$ ./voyagerstatus -v2 -m
+$ voyagerstatus -v2 -m
 Voyager 2 is 12,045,896,105 miles from the Sun.
 ```
 
 ```bash
-$ ./voyagerstatus -v1 --color=red
+$ voyagerstatus -v1 --color=red
 Voyager 1 is 23,294,958,078 kilometers from the Sun. # You can't see the color here on GitHub.
 ```
+
+## Bash version
+
+This program was originally a Bash script that I ported to C in 2023. You can still access the Bash script if you check the git history.
 
 ## Other info
 
