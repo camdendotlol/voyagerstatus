@@ -83,8 +83,7 @@ enum Voyager {One = 0, Two = 1};
 void display_distance(unsigned long long distance, struct Config config)
 {
   if (config.use_miles) {
-    unsigned long long m_distance;
-    m_distance = distance * KM_TO_MILES_OPERAND;
+    unsigned long long m_distance = distance * KM_TO_MILES_OPERAND;
 
     printf("%'llu miles", m_distance);
   } else {
@@ -106,8 +105,7 @@ double get_distance(enum Voyager voyager, unsigned long long seconds_since_calib
 
 void display_v1(struct Config config, unsigned long long seconds_since_calibration)
 {
-  double distance;
-  distance = get_distance(0, seconds_since_calibration);
+  double distance = get_distance(0, seconds_since_calibration);
 
   printf("Voyager 1 is ");
   display_distance(distance, config);
@@ -116,27 +114,26 @@ void display_v1(struct Config config, unsigned long long seconds_since_calibrati
 
 void display_v2(struct Config config, unsigned long long seconds_since_calibration)
 {
-  double distance;
-  distance = get_distance(1, seconds_since_calibration);
+  double distance = get_distance(1, seconds_since_calibration);
 
   printf("Voyager 2 is ");
   display_distance(distance, config);
   printf(" from the Sun.\n");
 };
 
-struct Config parse_arg(char* arg, struct Config config)
+void parse_arg(char* arg, struct Config *config)
 {
   if (strcmp(arg, "-v1") == 0)
   {
-    config.only_show_v1 = 1;
+    config->only_show_v1 = 1;
   }
   else if (strcmp(arg, "-v2") == 0)
   {
-    config.only_show_v2 = 1;
+    config->only_show_v2 = 1;
   }
   else if (strcmp(arg, "-m") == 0)
   {
-    config.use_miles = 1;
+    config->use_miles = 1;
   }
   else if (strncmp(arg, "--color=", 8) == 0)
   {
@@ -146,8 +143,6 @@ struct Config parse_arg(char* arg, struct Config config)
   {
     printf("Unrecognized argument: %s\n", arg);
   }
-
-  return config;
 }
 
 int main(int argc, char** argv)
@@ -163,11 +158,10 @@ int main(int argc, char** argv)
 
   int i;
   for (i = 1; i < argc; i++) {
-    config = parse_arg(argv[i], config);
+    parse_arg(argv[i], &config);
   };
 
-  unsigned long long seconds_since_calibration;
-  seconds_since_calibration = time(0) - CALIBRATION_TIME;
+  unsigned long long seconds_since_calibration = time(0) - CALIBRATION_TIME;
 
   if (config.only_show_v1)
   {
