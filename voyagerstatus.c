@@ -156,8 +156,7 @@ int main(int argc, char** argv)
     .use_miles = 0
   };
 
-  int i;
-  for (i = 1; i < argc; i++) {
+  for (int i = 1; i < argc; i++) {
     parse_arg(argv[i], &config);
   };
 
